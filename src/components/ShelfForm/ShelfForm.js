@@ -4,7 +4,8 @@ import {connect} from 'react-redux';
 class ShelfForm extends Component {
     //POST w/inputs
     state = {
-        item: ''
+        description: "",
+        image_url: ""
     }
     newItem = (event, type) => {
         console.log('input is:', event.target.value);
@@ -20,13 +21,17 @@ class ShelfForm extends Component {
             type: 'ADD_ITEM',
             payload: this.state
         })
+        this.setState({
+            description: "",
+            image_url: ""
+        })
     }//end addItem
 
     render() {
         return (
             <div>
-                <input placeholder="Add new item" onChange={(event) => this.newItem(event, 'item')}></input>
-                <input placeholder="image url" onChange={(event) => this.newItem(event, 'url')}></input>
+                <input placeholder="Add new item" onChange={(event) => this.newItem(event, 'description')}></input>
+                <input placeholder="image url" onChange={(event) => this.newItem(event, 'image_url')}></input>
                 <button onClick={this.addItem}>Add Item</button>
             </div>
         )//end return
