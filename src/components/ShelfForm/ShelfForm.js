@@ -6,26 +6,27 @@ class ShelfForm extends Component {
     state = {
         item: ''
     }
-    newItem = (event) => {
+    newItem = (event, type) => {
         console.log('input is:', event.target.value);
         this.setState({
-            item: event.target.value,
+            ...this.state,
+            [type]: event.target.value
         })
     }//end newItem
 
     addItem = () => {
-        console.log('add this item:', this.state.item)
+        console.log('add this item:', this.state)
         this.props.dispatch({
             type: 'ADD_ITEM',
-            payload: this.state.item
+            payload: this.state
         })
     }//end addItem
 
     render() {
         return (
             <div>
-                <h1>ShelfForm</h1>
-                <input placeholder="Add new item" onChange={this.newItem}></input>
+                <input placeholder="Add new item" onChange={(event) => this.newItem(event, 'item')}></input>
+                <input placeholder="image url" onChange={(event) => this.newItem(event, 'url')}></input>
                 <button onClick={this.addItem}>Add Item</button>
             </div>
         )//end return
