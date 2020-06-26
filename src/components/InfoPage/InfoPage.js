@@ -1,4 +1,5 @@
 import React from 'react';
+import ShelfForm from '../ShelfForm/ShelfForm';
 
 // This is one of our simplest components
 // It doesn't have local state, so it can be a function component.
@@ -9,6 +10,7 @@ const InfoPage = () => (
   <div>
     <p>
       Shelf Page
+      <ShelfForm/>
     </p>
   </div>
 );
