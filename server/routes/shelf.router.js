@@ -14,7 +14,16 @@ router.get('/', (req, res) => {
  * Add an item for the logged in user to the shelf
  */
 router.post('/', (req, res) => {
-
+    console.log('item and user:', req.body.item, req.user.id);
+    queryText = `INSERT INTO item (description, user_id) VALUES ($1, $2) ;`;
+    pool.query(queryText, [req.body.item, req.user.id])
+        .then(result => {
+            res.sendStatus(201);
+        }).catch(error => {
+            res.sendStatus(500);
+            alert('Issues adding you item, try again later')
+            console.log('error adding item:', error);
+        })
 });
 
 
@@ -22,6 +31,17 @@ router.post('/', (req, res) => {
  * Delete an item if it's something the logged in user added
  */
 router.delete('/:id', (req, res) => {
+    console.log('deleting item:', req.params.id);
+    console.log('user who made it:', req.user.id);
+    let queryText = `DELETE FROM "item" WHERE "id" = $1 AND "user_id" = $2;`;
+    pool.query(queryText [req.user.id, req.params.id])
+    .then(result => {
+        res.sendStatus(200);
+    }).catch(error => {
+        res.sendStatus(500);
+        alert('Sorry, you can only delete items you have added.')
+        console.log(error);
+    })
 
 });
 
