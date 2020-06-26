@@ -16,9 +16,9 @@ function* getItems() {
     }
 }
 
-function* deleteItem(){
+function* deleteItem(action){
     try {
-        yield axios.delete(`/api/shelf/${id}`)
+        yield axios.delete(`/api/shelf/${action.payload}`)
         yield put({type: 'GET_SHELF'})
     }catch(error){
         console.log(error)

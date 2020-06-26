@@ -8,7 +8,7 @@ class ShelfItem extends Component{
 deleteItem = () => {
     this.props.dispatch({
         type: 'DELETE_ITEM',
-        payload: this.state.item
+        payload: this.props.item.id
     })
 }
 
