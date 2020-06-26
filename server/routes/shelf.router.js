@@ -33,16 +33,19 @@ router.post('/', (req, res) => {
 router.delete('/:id', (req, res) => {
     console.log('deleting item:', req.params.id);
     console.log('user who made it:', req.user.id);
-    let queryText = `DELETE FROM "item" WHERE "id" = $1 AND "user_id" = $2;`;
-    pool.query(queryText [req.user.id, req.params.id])
-    .then(result => {
-        res.sendStatus(200);
-    }).catch(error => {
-        res.sendStatus(500);
-        alert('Sorry, you can only delete items you have added.')
-        console.log(error);
-    })
-
+    if (req.isAuthenticated() && req.user.id === req.params.id) {
+        let queryText = `DELETE FROM "item" WHERE "id" = $1 AND "user_id" = $2;`;
+        pool.query(queryText[req.user.id, req.params.id])
+            .then(result => {
+                res.sendStatus(200);
+            }).catch(error => {
+                res.sendStatus(500);
+                console.log(error);
+            })
+    }
+    else {
+        alert("You can only delete items you've created!")
+    }
 });
 
 
