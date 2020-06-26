@@ -1,10 +1,10 @@
 import axios from 'axios';
-import { put, takeLatest, takeEvery } from 'redux-saga/effects';
+import { put, takeEvery } from 'redux-saga/effects';
 //import { response } from 'express';
 
 function* shelfSaga(){
     yield takeEvery('GET_SHELF', getItems);
-    yield takeEvery('REMOVE_ITEM', deleteItem);
+    yield takeEvery('DELETE_ITEM', deleteItem);
 }
 
 function* getItems() {
