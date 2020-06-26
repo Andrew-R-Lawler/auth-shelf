@@ -5,9 +5,9 @@ import { response } from 'express';
 function* getItems() {
     try {
         const itemsResponse = yield axios.get('/api/shelf')
-        yield put({ type: 'SET_SHELF', payload: response.data })
+        yield put({ type: 'SET_SHELF', payload: itemsResponse })
     } catch (error) {
-        console.log('error', error );
+        console.log( 'error', error );
     }
 }
 function* shelfSaga () {
