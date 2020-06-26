@@ -5,6 +5,7 @@ import { put, takeEvery } from 'redux-saga/effects';
 function* shelfSaga(){
     yield takeEvery('GET_SHELF', getItems);
     yield takeEvery('DELETE_ITEM', deleteItem);
+    yield takeEvery('ADD_ITEM', addItem);
 }
 
 function* getItems() {
@@ -13,6 +14,15 @@ function* getItems() {
         yield put({ type: 'SET_SHELF', payload: itemsResponse })
     } catch (error) {
         console.log( 'error', error );
+    }
+}
+
+function* addItem(action){
+    try {
+        yield axios.post('/api/shelf', action.payload)
+        yield put({ type: 'GET_SHELF' })
+    } catch (error) {
+        console.log( 'error', error);
     }
 }
 
