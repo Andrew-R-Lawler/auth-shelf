@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import TableItems from './TableItems.js';
 
 class Shelf extends Component {
     //GET
@@ -11,17 +10,10 @@ class Shelf extends Component {
         const action = { type: 'GET_SHELF' };
         this.props.dispatch(action);
     };
-    // populateTable = () => {
-    //     console.log('table', this.props.reduxStore.shelfReducer);
-    //     return this.props.reduxStore.shelfReducer.map((response, i) => {
-    //         return <TableItems response={response} key={i} />
-
-    //     })
-    // }
-
+  
     render() {
-
         return (
+            <h1>Shelf</h1>
             <div>
                 <table>
                     <thead>
