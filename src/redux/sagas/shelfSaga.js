@@ -1,6 +1,11 @@
 import axios from 'axios';
-import { put, takeLatest } from 'redux-saga/effects';
-import { response } from 'express';
+import { put, takeLatest, takeEvery } from 'redux-saga/effects';
+//import { response } from 'express';
+
+function* shelfSaga(){
+    yield takeEvery('GET_SHELF', getItems);
+    yield takeEvery('REMOVE_ITEM', deleteItem);
+}
 
 function* getItems() {
     try {
@@ -10,8 +15,14 @@ function* getItems() {
         console.log( 'error', error );
     }
 }
-function* shelfSaga () {
-    yield takeLatest('GET_SHELF', getItems)
+
+function* deleteItem(){
+    try {
+        yield axios.delete(`/api/shelf/${id}`)
+        yield put({type: 'GET_SHELF'})
+    }catch(error){
+        console.log(error)
+    }
 }
 
 export default shelfSaga;
