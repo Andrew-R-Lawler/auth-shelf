@@ -67,7 +67,14 @@ router.put('/:id', (req, res) => {
  * they have added to the shelf
  */
 router.get('/count', (req, res) => {
-
+    queryText = `SELECT * FROM "item"`
+    pool.query('/', queryText)
+    .then(result => res.send(result.rows))
+    .catch(error => {
+        console.log('Error making GET request', error);
+        res.sendStatus(500);
+        
+    })
 });
 
 
