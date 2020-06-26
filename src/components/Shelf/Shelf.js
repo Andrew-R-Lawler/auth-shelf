@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+// import TableItems from './TableItems.js';
 
 class Shelf extends Component {
     //GET
@@ -10,13 +11,39 @@ class Shelf extends Component {
         const action = { type: 'GET_SHELF' };
         this.props.dispatch(action);
     };
-    render() {
-        return (
-            <h1>Shelf</h1>
+    // populateTable = () => {
+    //     console.log('table', this.props.reduxStore.shelfReducer);
+    //     return this.props.reduxStore.shelfReducer.map((response, i) => {
+    //         return <TableItems response={response} key={i} />
 
-        )//end return
-    }//end render
-}//end class
+    //     })
+    // }
+
+    render() {
+
+        return (
+            <div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th>image</th>
+                        </tr>
+                        {this.props.reduxStore.shelf.map((item) => {
+                            return (
+                                <tr>
+                                    <td><img src={item.image.image_url} /></td>
+                                    <td>{item.description}/</td>
+                                </tr>
+                            )
+                        })
+                        }
+                    </thead>
+                </table>
+            </div>
+        );
+    }
+}
 
 const mapReduxStoreToProps = (reduxStore) => ({
     reduxStore: reduxStore
