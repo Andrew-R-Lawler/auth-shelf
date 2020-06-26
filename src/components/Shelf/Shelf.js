@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 class Shelf extends Component {
     //GET
     componentDidMount() {
-        this.getItems();
+        this.getShelf();
     }
-    getItems() {
-        const action = { type: 'GET_ITEMS' };
+    getShelf() {
+        const action = { type: 'GET_SHELF' };
         this.props.dispatch(action);
     };
     render() {
